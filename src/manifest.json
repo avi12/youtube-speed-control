@@ -1,0 +1,68 @@
+{
+  "name": "YouTube Speed Control",
+  "short_name": "YT Speed",
+  "description": "Control the speed of YouTube videos!",
+  "version": "1.0.0",
+  "author": "avi12",
+  "developer": {
+    "name": "avi12",
+    "url": "https://avi12.com"
+  },
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "24": "images/icon-24.png",
+    "32": "images/icon-32.png",
+    "38": "images/icon-38.png",
+    "48": "images/icon-48.png",
+    "64": "images/icon-64.png",
+    "96": "images/icon-96.png",
+    "128": "images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://www.youtube-nocookie.com/*"
+      ],
+      "js": [
+        "scripts/yt-speed-control-setup-utils.js",
+        "scripts/yt-speed-control-content-script-initialize.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": ["scripts/background.js"],
+    "persistent": false
+  },
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_title": "YouTube Speed Control",
+    "default_popup": "options.html",
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "19": "images/icon-19.png",
+      "24": "images/icon-24.png",
+      "32": "images/icon-32.png",
+      "38": "images/icon-38.png",
+      "48": "images/icon-48.png",
+      "64": "images/icon-64.png",
+      "96": "images/icon-96.png",
+      "128": "images/icon-128.png"
+    }
+  },
+  "content_security_policy": "default-src 'none'; child-src 'none'; manifest-src 'none'; media-src 'none'; prefetch-src 'none'; worker-src 'none'; connect-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; img-src data:; script-src 'self' 'unsafe-eval'; script-src-elem 'report-sample' 'self' 'unsafe-eval'; script-src-attr 'none'; style-src 'self'; style-src-attr 'self'; style-src-elem 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests; sandbox allow-same-origin allow-scripts allow-popups; report-uri https://api.jeurissen.co/reports/csp/webext/ythd/v1_1_18/",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "youtube-speed-control@avi12.com"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "youtube-speed-control@avi12.com"
+    }
+  }
+}

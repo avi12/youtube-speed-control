@@ -1,0 +1,37 @@
+html {
+  overflow-y: hidden;
+}
+
+#app {
+  font-family: system-ui, sans-serif;
+  text-align: center;
+  width: 18rem;
+  font-size: 17px;
+}
+
+.link {
+  color: #00f;
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: 0.25s;
+  font-family: Arial, sans-serif;
+}
+
+.link:hover,
+.link:focus {
+  color: #080;
+  border-bottom: 1px solid;
+}
+
+.max-width--offers {
+  max-width: 90%;
+}
+
+.v-slider--vertical {
+  margin-bottom: 0;
+}
+
+.v-application--wrap {
+  min-height: 100%;
+}
