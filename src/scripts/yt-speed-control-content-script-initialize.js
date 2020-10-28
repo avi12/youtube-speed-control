@@ -1,3 +1,5 @@
+"use strict";
+
 let gContentScript;
 
 // Get the speed and the content from "yt-speed-control-script-to-inject.js"
