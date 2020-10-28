@@ -18,7 +18,6 @@ getElementByObserver("title").then(elTitle => {
   // Determining when a page navigation occurs
   // by observing the title's change
   const observerPageNavigation = new MutationObserver(async () => {
-    // noinspection UnnecessaryLocalVariableJS
     const speed = (await getStorage("local", "speed")) ?? initial.speed;
     document.documentElement.dataset.ytSpeedControl = speed.toString();
     injectScript(gContentScript);
