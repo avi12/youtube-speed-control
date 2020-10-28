@@ -30,8 +30,8 @@ async function getStorage(storageArea, key = null) {
  * @param {string} fallback If no value is present in the `messages.json` for the current browser's language, it will be used instead.
  * @returns {string} The string, either from `chrome.i18n.getMessage(...)` or from the `fallback`.
  */
-function i18n(id, fallback) {
-  return (id && chrome.i18n.getMessage(id)) || fallback || "";
+function i18n(id, fallback = "") {
+  return (id && chrome.i18n.getMessage(id)) || fallback;
 }
 
 /**
