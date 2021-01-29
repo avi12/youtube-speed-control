@@ -2,7 +2,7 @@
   "name": "YouTube Speed Control",
   "short_name": "YT Speed",
   "description": "Control the speed of YouTube videos!",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "author": "avi12",
   "developer": {
     "name": "avi12",
@@ -35,10 +35,14 @@
     }
   ],
   "background": {
-    "scripts": ["scripts/background.js"],
+    "scripts": [
+      "scripts/background.js"
+    ],
     "persistent": false
   },
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "browser_action": {
     "default_title": "YouTube Speed Control",
     "default_popup": "options.html",
