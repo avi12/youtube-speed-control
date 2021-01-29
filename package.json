@@ -1,0 +1,73 @@
+{
+  "name": "extension-test",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service build --watch",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename youtube-speed-control-{version}.zip",
+    "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
+    "build-pack": "pnpm run build && pnpm run pack && pnpm run pack-self",
+    "set-version": "set-json-version -f package.json src/manifest.json -v",
+    "run-browser": "web-ext run --no-config-discovery --start-url https://www.youtube.com/watch?v=dQw4w9WgXcQ --source-dir dist --verbose --target",
+    "run-firefox": "pnpm run-browser firefox-desktop",
+    "run-chromium": "pnpm run-browser chromium",
+    "run-edge-windows": "\"\"%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe\"\" https://www.youtube.com/watch?v=dQw4w9WgXcQ --load-extension=%cd%\\dist"
+  },
+  "dependencies": {
+    "@mdi/js": "^5.9.55",
+    "core-js": "^3.6.5",
+    "set-json-version": "^1.0.4",
+    "vue": "^2.6.11",
+    "vuetify": "2.4.0",
+    "web-ext": "^5.5.0",
+    "zip-self": "^0.2.5"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-vue": "^6.2.2",
+    "prettier": "^1.19.1",
+    "sass": "^1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-simple-extension": "~1.1.1",
+    "vue-cli-plugin-vuetify": "~2.1.0",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "@vue/prettier"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-unused-vars": "warn",
+      "no-undef": "off"
+    }
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "trailingComma": "none",
+    "singleQuote": false
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
