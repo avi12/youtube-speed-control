@@ -109,8 +109,17 @@ export default {
 </style>
 
 <style>
+/* Hide the scrollbar on Firefox */
 html {
-  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+/*
+* Since the scrollbar is hidden but still occupying space,
+* my solution is to just shift the body to the right
+*/
+body {
+  margin-right: -20px;
 }
 
 /*noinspection CssUnusedSymbol*/
