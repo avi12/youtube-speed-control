@@ -15,7 +15,7 @@ Made by [avi12](https://avi12.com).
 * [simple-extension](https://github.com/markovroma/vue-cli-plugin-browser-extension)
 
 ## Requirements for setting up
-Install [Node.js](https://nodejs.org) and [PNPM](https://pnpm.js.org/en/installation).
+Install [Node.js](https://nodejs.org) and [Yarn 1.x](https://classic.yarnpkg.com/en/docs/install).
 
 ## Download dependencies:
 ```shell
