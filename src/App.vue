@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :class="{ 'body-shift-right': isFirefox }">
     <h2 class="red--text my-4 font-weight-medium">YouTube Speed Control</h2>
     <v-slider
       :max="labelSpeedsReversed.length - 1"
@@ -70,6 +70,9 @@ export default {
         }
         return speed;
       });
+    },
+    isFirefox() {
+      return chrome.runtime.getURL("").startsWith("moz-extension://");
     }
   },
   methods: {
@@ -118,7 +121,7 @@ html {
 * Since the scrollbar is hidden but still occupying space,
 * my solution is to just shift the body to the right
 */
-body {
+body .body-shift-right {
   margin-right: -20px;
 }
 
