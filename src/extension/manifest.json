@@ -2,7 +2,7 @@
   "name": "YouTube Speed Control",
   "short_name": "YT Speed",
   "description": "Control the speed of YouTube videos!",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "avi12",
   "developer": {
     "name": "avi12",
@@ -26,12 +26,16 @@
         "https://www.youtube.com/*",
         "https://www.youtube-nocookie.com/*"
       ],
-      "js": ["content.js"],
+      "js": [
+        "content.js"
+      ],
       "all_frames": true,
       "run_at": "document_start"
     }
   ],
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "background": {
     "page": "background.html",
     "persistent": false
