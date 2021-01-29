@@ -1,7 +1,6 @@
 {
-  "name": "extension-test",
+  "name": "youtube-speed-control",
   "version": "1.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service build --watch",
     "build": "vue-cli-service build",
