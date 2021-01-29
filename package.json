@@ -8,7 +8,7 @@
     "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename youtube-speed-control-{version}.zip",
     "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
     "build-pack": "yarn run build && yarn run pack && yarn run pack-self",
-    "set-version": "set-json-version -f package.json src/manifest.json -v",
+    "set-version": "set-json-version -f package.json src/extension/manifest.json -v",
     "run-browser": "web-ext run --no-config-discovery --start-url https://www.youtube.com/watch?v=dQw4w9WgXcQ --source-dir dist --verbose --target",
     "run-firefox": "yarn run-browser firefox-desktop",
     "run-chromium": "yarn run-browser chromium",
