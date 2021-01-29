@@ -1,25 +1,23 @@
-# Yarn and npm
-yarn-error.log
-npm-debug.log
-node_modules
-
-# WebStorm files
-.idea/*
-
-# Vim swap files
-*.swp
-*.swo
-
-# Sublime files
-*.sublime-workspace
-*.sublime-project
-
-# Mac and windows files
 .DS_Store
-.tmp
-
-# Distribution
-/dist_packed-edge
-/dist_packed
-/dist-edge
+node_modules
 /dist
+/dist_packed
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
