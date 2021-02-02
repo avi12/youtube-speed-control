@@ -42,8 +42,23 @@ pnpm run-edge-windows
 
 ### Other browsers
 1. Open the extensions page in your browser.
-1. Enable the developer tools (top-right corner usually).
+1. Enable the developer mode (top-right corner usually).
 1. Either drag-drop the `dist` folder onto the browser or click "Load unpacked extension" and choose it.
+
+## Build
+```powershell
+pnpm build
+```
+
+## Pack
+```powershell
+pnpm run pack
+```
+
+## Shorthand
+```powershell
+pnpm build-pack
+```
 
 ## Contribution
 Feel free to contribute!  
