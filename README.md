@@ -19,7 +19,7 @@ Install [Node.js](https://nodejs.org) and [PNPM](https://pnpm.js.org/installatio
 
 ## Download dependencies:
 ```powershell
-pnpm i --shamefully-hoist
+pnpm i
 ```
 ## Start for development
 ```powershell
