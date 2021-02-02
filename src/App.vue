@@ -43,7 +43,6 @@ export default {
   },
   data(vm) {
     return {
-      iSpeed: vm.pISpeed,
       iSpeedReversed: "", // Default: Normal
       speedsReversed: [...speeds].reverse(),
       // Reversing because Vuetify is flipping the array
@@ -112,8 +111,9 @@ export default {
 </style>
 
 <style>
-/* Hide the scrollbar on Firefox */
+/* Firefox: Hide scrollbar */
 html {
+  /*noinspection CssUnknownProperty*/
   scrollbar-width: none;
 }
 
@@ -121,10 +121,13 @@ html {
 * Since the scrollbar is hidden but still occupying space,
 * my solution is to just shift the body to the right
 */
+/*noinspection CssUnusedSymbol*/
 body .body-shift-right {
   margin-right: -20px;
 }
+</style>
 
+<style>
 /*noinspection CssUnusedSymbol*/
 #app {
   font-family: system-ui, sans-serif;
