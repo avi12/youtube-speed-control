@@ -3,14 +3,7 @@
 export const speeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
 export const initial = {
-  speed: 1,
-  // Used for the options.js
-  get iSpeed() {
-    return speeds.indexOf(this.speed);
-  },
-  get speedCustom() {
-    return this.speed;
-  }
+  speed: 1
 };
 
 /**
