@@ -15,29 +15,29 @@ Made by [avi12](https://avi12.com).
 * [simple-extension](https://github.com/markovroma/vue-cli-plugin-browser-extension)
 
 ## Requirements for setting up
-Install [Node.js](https://nodejs.org) and [Yarn 1.x](https://classic.yarnpkg.com/en/docs/install).
+Install [Node.js](https://nodejs.org) and [PNPM](https://pnpm.js.org/installation).
 
 ## Download dependencies:
-```shell
-yarn
+```powershell
+pnpm i --shamefully-hoist
 ```
 ## Start for development
-```shell
-yarn serve
+```powershell
+pnpm serve
 ````
 ## Running
 ### Chromium/Chrome
-```shell script
-yarn run-chromium
+```powershell script
+pnpm run-chromium
 ```
 ### Firefox
-```shell script
-yarn run-firefox
+```powershell script
+pnpm run-firefox
 ```
 
 ### Chromium Edge on Windows
-```shell
-yarn run-edge-windows
+```powershell
+pnpm run-edge-windows
 ```
 
 ### Other browsers
