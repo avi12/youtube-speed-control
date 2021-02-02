@@ -9,7 +9,7 @@ import {
 Vue.config.productionTip = false;
 
 async function init() {
-  const speed = (await getStorage("local", "speed")) ?? initial.speedCustom;
+  const speed = (await getStorage("local", "speed")) ?? initial.speed;
 
   new Vue({
     vuetify,
