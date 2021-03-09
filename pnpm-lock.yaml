@@ -2,7 +2,7 @@ dependencies:
   '@mdi/js': 5.9.55
   core-js: 3.9.1
   vue: 2.6.12
-  vuetify: 2.4.0_vue@2.6.12
+  vuetify: 2.4.6_vue@2.6.12
 devDependencies:
   '@vue/cli-plugin-babel': 4.5.11_7fd1c33fe171018602ad64aa8e04225c
   '@vue/cli-plugin-eslint': 4.5.11_9fda969a513e1814449ba255c1b89354
@@ -21,7 +21,7 @@ devDependencies:
   vue-cli-plugin-simple-extension: 1.1.1
   vue-cli-plugin-vuetify: 2.2.2_f11a31c203550e1048e1f95f499f9c0b
   vue-template-compiler: 2.6.12
-  vuetify-loader: 1.7.2_c225a462abeaf467a2189c5bd12e241a
+  vuetify-loader: 1.7.2_96e1daf25069f5f7e7f71aeb10813e37
   web-ext: 5.5.0
   zip-self: 0.3.1
 lockfileVersion: 5.2
@@ -10677,7 +10677,7 @@ packages:
       sass-loader: 10.1.1_sass@1.32.8
       semver: 7.3.4
       shelljs: 0.8.4
-      vuetify-loader: 1.7.2_c225a462abeaf467a2189c5bd12e241a
+      vuetify-loader: 1.7.2_96e1daf25069f5f7e7f71aeb10813e37
     dev: true
     peerDependencies:
       sass-loader: '*'
@@ -10764,13 +10764,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
-  /vuetify-loader/1.7.2_c225a462abeaf467a2189c5bd12e241a:
+  /vuetify-loader/1.7.2_96e1daf25069f5f7e7f71aeb10813e37:
     dependencies:
       decache: 4.6.0
       file-loader: 6.2.0
       loader-utils: 2.0.0
       vue-template-compiler: 2.6.12
-      vuetify: 2.4.0_vue@2.6.12
+      vuetify: 2.4.6_vue@2.6.12
     dev: true
     peerDependencies:
       vue-template-compiler: ^2.6.10
@@ -10778,14 +10778,14 @@ packages:
       webpack: ^4.0.0 || ^5.0.0
     resolution:
       integrity: sha512-2GSo4KvRAOThBsj8mvtIEeIoyBAZx38GDfh8D90e/or7Hzx4813krJKvcQAllyLO/Ln0eQWrq2IuvBXnZ55cSA==
-  /vuetify/2.4.0_vue@2.6.12:
+  /vuetify/2.4.6_vue@2.6.12:
     dependencies:
       vue: 2.6.12
     dev: false
     peerDependencies:
       vue: ^2.6.4
     resolution:
-      integrity: sha512-FBFAtg1ZnNwDBhMzENCzgh0hBV+HMjXejrxeRQqTfKPojKQSQFswtdHatUPmlkArDulZC73GRs2F/IwdF48o5g==
+      integrity: sha512-oqAWKAin07ip/QuT/p4bL1LegE3MYPbfojrOcj80RATZDSnJyco2PZD8QuIzd0RhYfdAuSTkY8elvHsLu90RuQ==
   /watchpack-chokidar2/2.0.1:
     dependencies:
       chokidar: 2.1.8
@@ -11379,7 +11379,7 @@ specifiers:
   vue-cli-plugin-simple-extension: ~1.1.1
   vue-cli-plugin-vuetify: ~2.2.2
   vue-template-compiler: ^2.6.12
-  vuetify: 2.4.0
+  vuetify: 2.4.6
   vuetify-loader: ^1.7.2
   web-ext: ^5.5.0
   zip-self: ^0.3.1
