@@ -8,6 +8,7 @@
     "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename youtube-speed-control-{version}.zip",
     "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
     "build-pack": "pnpm run build && pnpm run pack && pnpm run pack-self",
+    "deploy": "web-ext-deploy --env",
     "set-version": "set-json-version -f package.json src/extension/manifest.json -v",
     "run-browser": "web-ext run --no-config-discovery --start-url https://www.youtube.com/watch?v=dQw4w9WgXcQ --source-dir dist --verbose --target",
     "run-firefox": "pnpm run-browser firefox-desktop",
