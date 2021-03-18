@@ -23,19 +23,15 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.youtube.com/*",
-        "https://www.youtube-nocookie.com/*"
+        "https://*.youtube.com/*",
+        "https://*.youtube-nocookie.com/*"
       ],
-      "js": [
-        "content.js"
-      ],
+      "js": ["content.js"],
       "all_frames": true,
       "run_at": "document_start"
     }
   ],
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "background": {
     "page": "background.html",
     "persistent": false
