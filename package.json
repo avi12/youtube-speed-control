@@ -27,7 +27,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
     "copy-webpack-plugin": "5.1.2",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.7.0",
     "prettier": "^2.2.1",
@@ -39,7 +39,8 @@
     "vue-cli-plugin-vuetify": "~2.2.2",
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.7.2",
-    "web-ext": "^5.5.0",
+    "web-ext": "^6.0.0",
+    "web-ext-deploy": "^0.3.0",
     "zip-self": "^0.3.1"
   },
   "eslintConfig": {
