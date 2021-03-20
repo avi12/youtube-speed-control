@@ -1,6 +1,8 @@
 # YouTube Speed Control
 A browser extension that lets you control the speed of YouTube videos, even if they're embedded, including changing the speed "on the fly", i.e. changing the speed will immediately affect any videos you're watching.
 
+![Google Chrome screenshot](https://github.com/avi12/youtube-speed-control/blob/main/images/screenshots/chrome/english.png?raw=true)
+
 Available for:
 * [Google Chrome](https://chrome.google.com/webstore/detail/dmpbgbehgckaijcpmodinibhkdgbifif) ![users count](https://img.shields.io/chrome-web-store/users/dmpbgbehgckaijcpmodinibhkdgbifif?color=white&label=users&style=flat-square)
 * [Mozilla Firefox](https://addons.mozilla.org/addon/youtube-speed-control-1) ![users count](https://img.shields.io/amo/users/youtube-speed-control-1?color=white&label=users&style=flat-square)
