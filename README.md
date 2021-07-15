@@ -6,7 +6,7 @@ A browser extension that lets you control the speed of YouTube videos, even if t
 Available for:
 * [Google Chrome](https://chrome.google.com/webstore/detail/dmpbgbehgckaijcpmodinibhkdgbifif) ![users count](https://img.shields.io/chrome-web-store/users/dmpbgbehgckaijcpmodinibhkdgbifif?color=white&label=users&style=flat-square)
 * [Mozilla Firefox](https://addons.mozilla.org/addon/youtube-speed-control-1) ![users count](https://img.shields.io/amo/users/youtube-speed-control-1?color=white&label=users&style=flat-square)
-* [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ipajmlopcjnobogfakhlggainepilahm)
+* [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ipajmlopcjnobogfakhlggainepilahm) ![users count](https://img.shields.io/badge/dynamic/json?label=users&query=activeInstallCount&style=flat-square&color=white&url=https://microsoftedge.microsoft.com/addons/getproductdetailsbycrxid/ipajmlopcjnobogfakhlggainepilahm)
 * [Opera](https://addons.opera.com/en/extensions/details/youtube-speed-control)
    
 Made by [avi12](https://avi12.com).
