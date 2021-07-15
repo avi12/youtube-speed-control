@@ -41,7 +41,6 @@
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.7.2",
     "web-ext": "^6.0.0",
-    "web-ext-deploy": "^0.7.1",
     "zip-self": "^0.3.1"
   },
   "eslintConfig": {
