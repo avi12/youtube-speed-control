@@ -1,6 +1,6 @@
 {
   "name": "youtube-speed-control",
-  "version": "1.1.10",
+  "version": "1.2.0",
   "scripts": {
     "serve": "vue-cli-service build --watch",
     "build": "vue-cli-service build",
@@ -17,31 +17,28 @@
   },
   "dependencies": {
     "@mdi/js": "^5.9.55",
-    "core-js": "^3.9.1",
-    "vue": "^2.6.12",
-    "vuetify": "2.4.6"
+    "core-js": "^3.16.4",
+    "vue": "^2.6.14",
+    "vuetify": "2.5.8"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.11",
-    "@vue/cli-plugin-eslint": "~4.5.11",
-    "@vue/cli-service": "~4.5.11",
+    "@types/chrome": "^0.0.154",
+    "@vue/cli-plugin-babel": "~4.5.13",
+    "@vue/cli-plugin-eslint": "~4.5.13",
+    "@vue/cli-service": "~4.5.13",
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
     "copy-webpack-plugin": "5.1.2",
-    "eslint": "^7.22.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^7.7.0",
-    "prettier": "^2.2.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^7.17.0",
     "regenerator-runtime": "^0.13.7",
-    "sass": "^1.32.8",
-    "sass-loader": "10.1.1",
-    "set-json-version": "^1.0.5",
+    "sass": "^1.39.0",
+    "sass-loader": "10.2.0",
+    "set-json-version": "^1.0.6",
     "vue-cli-plugin-simple-extension": "~1.1.1",
-    "vue-cli-plugin-vuetify": "~2.2.2",
-    "vue-template-compiler": "^2.6.12",
-    "vuetify-loader": "^1.7.2",
-    "web-ext": "^6.0.0",
-    "zip-self": "^0.3.1"
+    "vue-cli-plugin-vuetify": "~2.4.2",
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
