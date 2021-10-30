@@ -1,71 +1,42 @@
 {
   "name": "youtube-speed-control",
-  "version": "1.2.0",
+  "version": "2.0.0",
+  "license": "MIT",
+  "author": "avi12 <avi6106@gmail.com>",
+  "homepage": "https://avi12.com",
+  "bugs": {
+    "email": "avi6106@gmail.com"
+  },
   "scripts": {
-    "serve": "vue-cli-service build --watch",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename youtube-speed-control-{version}.zip",
+    "serve": "rollup -c -w",
+    "build": "rollup -c",
     "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
-    "build-pack": "pnpm run build && pnpm run pack && pnpm run pack-self",
+    "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename=youtube-speed-control-{version}.zip",
+    "build-for-firefox": "node ../steam-id-finder/build-for-firefox.js --i dist_packed/youtube-speed-control-{version}.zip",
+    "webext-incompat-fix": "webext-store-incompat-fixer -i dist_packed/youtube-speed-control-{version}.zip -s chrome,edge,firefox,opera",
+    "build-pack": "pnpm run build && pnpm run pack && pnpm run webext-incompat-fix && pnpm run pack-self && pnpm run build-for-firefox",
     "deploy": "web-ext-deploy --env --verbose",
-    "set-version": "set-json-version -f package.json src/extension/manifest.json -v",
+    "set-version": "set-json-version -f package.json dist/manifest.json -v",
     "run-browser": "web-ext run --no-config-discovery --start-url https://www.youtube.com/watch?v=dQw4w9WgXcQ --source-dir dist --verbose --target",
     "run-firefox": "pnpm run-browser firefox-desktop",
-    "run-chromium": "pnpm run-browser chromium",
-    "run-edge-windows": "\"\"%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe\"\" https://www.youtube.com/watch?v=dQw4w9WgXcQ --load-extension=%cd%\\dist"
-  },
-  "dependencies": {
-    "@mdi/js": "^5.9.55",
-    "core-js": "^3.16.4",
-    "vue": "^2.6.14",
-    "vuetify": "2.5.8"
+    "run-chromium": "pnpm run-browser chromium"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.154",
-    "@vue/cli-plugin-babel": "~4.5.13",
-    "@vue/cli-plugin-eslint": "~4.5.13",
-    "@vue/cli-service": "~4.5.13",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "copy-webpack-plugin": "5.1.2",
-    "eslint": "^7.32.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^7.17.0",
-    "regenerator-runtime": "^0.13.7",
-    "sass": "^1.39.0",
-    "sass-loader": "10.2.0",
+    "@rollup/plugin-commonjs": "^21.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.5",
+    "@types/chrome": "^0.0.162",
+    "adm-zip": "^0.5.9",
+    "postcss": "^8.3.9",
+    "prettier-plugin-svelte": "^2.4.0",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "1.13.1",
     "set-json-version": "^1.0.6",
-    "vue-cli-plugin-simple-extension": "~1.1.1",
-    "vue-cli-plugin-vuetify": "~2.4.2",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/prettier"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {
-      "no-unused-vars": "warn",
-      "no-undef": "off"
-    }
-  },
-  "prettier": {
-    "arrowParens": "avoid",
-    "trailingComma": "none",
-    "singleQuote": false
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "svelte": "^3.43.2",
+    "svelte-materialify": "0.3.7",
+    "svelte-preprocess": "^4.9.8",
+    "web-ext": "^6.5.0",
+    "yargs": "^17.2.1"
+  }
 }
