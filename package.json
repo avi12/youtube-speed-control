@@ -12,7 +12,7 @@
     "build": "rollup -c",
     "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
     "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename=youtube-speed-control-{version}.zip",
-    "build-for-firefox": "node ../steam-id-finder/build-for-firefox.js --i dist_packed/youtube-speed-control-{version}.zip",
+    "build-for-firefox": "node build-for-firefox.js --i dist_packed/youtube-speed-control-{version}.zip",
     "webext-incompat-fix": "webext-store-incompat-fixer -i dist_packed/youtube-speed-control-{version}.zip -s chrome,edge,firefox,opera",
     "build-pack": "pnpm run build && pnpm run pack && pnpm run webext-incompat-fix && pnpm run pack-self && pnpm run build-for-firefox",
     "deploy": "web-ext-deploy --env --verbose",
