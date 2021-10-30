@@ -61,22 +61,15 @@ pnpm run-edge-windows
 1. Enable the developer mode (top-right corner usually).
 1. Either drag-drop the `dist` folder onto the browser or click "Load unpacked extension" and choose it.
 
-## Build
-
-```shell
-pnpm build
-```
-
-## Pack
-
-```shell
-pnpm run pack
-```
-
-## Shorthand
+## Build & pack
 
 ```shell
 pnpm build-pack
+```
+
+### Build for Firefox (you need to first run `pnpm build-pack`)
+```shell
+pnpm build-for-firefox
 ```
 
 ## Contribution
