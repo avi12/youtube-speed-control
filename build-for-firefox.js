@@ -15,7 +15,7 @@ function getManifest(zip) {
 }
 
 function getModifiedManifest(manifest) {
-  manifest.manifest_version = 3;
+  manifest.manifest_version = 2;
   manifest.browser_action = { ...manifest.action };
   delete manifest.action;
   return manifest;
