@@ -1,8 +1,18 @@
 "use strict";
 
-import { getCompatibleValue, getStorage, initial } from "../shared-utils/ytsc-setup-utils";
+import {
+  getCompatibleValue,
+  getElementByObserver,
+  getStorage,
+  initial
+} from "../shared-utils/ytsc-setup-utils";
 
 let gSpeedLast;
+
+const gObserverOptions = {
+  childList: true,
+  subtree: true
+};
 
 async function getSpeed() {
   try {
@@ -12,14 +22,10 @@ async function getSpeed() {
   } catch {}
   return gSpeedLast;
 }
-
 async function addNavigationListener() {
   const elTitle = await getElementByObserver("title");
   const observerPageNavigation = new MutationObserver(addTemporaryBodyListener);
-  observerPageNavigation.observe(elTitle, {
-    childList: true,
-    subtree: true
-  });
+  observerPageNavigation.observe(elTitle, gObserverOptions);
 }
 
 async function setSpeedToCurrentVideo() {
@@ -53,7 +59,7 @@ function injectPlaybackText() {
 
 function addTemporaryBodyListener() {
   new MutationObserver(async (_, observer) => {
-    const elVideo = document.querySelector("video");
+    const elVideo = await getElementByObserver("video");
     if (!elVideo) {
       return;
     }
@@ -61,7 +67,7 @@ function addTemporaryBodyListener() {
     injectPlaybackText();
     await setSpeedToCurrentVideo();
     addPlaybackListener(elVideo);
-  }).observe(document.documentElement, { childList: true, subtree: true });
+  }).observe(document.documentElement, gObserverOptions);
 }
 
 function addStorageListener() {
