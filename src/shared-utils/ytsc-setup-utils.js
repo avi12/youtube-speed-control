@@ -3,7 +3,11 @@
 export const speeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
 export const initial = {
-  speed: 1
+  speed: 1,
+  speedRate: {
+    increment: 0.25,
+    decrement: 0.25
+  }
 };
 
 export const MIN_PLAYBACK = 0.0625;
