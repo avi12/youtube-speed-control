@@ -11,18 +11,18 @@ function createConfig(filename, useSvelte = false) {
   return {
     input: `src/${filename}.js`,
     output: {
-      format: "iife",
+      format: "cjs",
       file: `dist/build/${filename}.js`
     },
     plugins: [
       useSvelte && css({ output: "popup.css" }),
       useSvelte &&
-      svelte({
-        compilerOptions: {
-          dev: !isProduction
-        },
-        preprocess: sveltePreprocess()
-      }),
+        svelte({
+          compilerOptions: {
+            dev: !isProduction
+          },
+          preprocess: sveltePreprocess()
+        }),
       resolve({
         dedupe: ["svelte"]
       }),
@@ -35,7 +35,21 @@ function createConfig(filename, useSvelte = false) {
   };
 }
 
+function createConfigCss(filename) {
+  return {
+    input: `src/styles-injected/${filename}.css`,
+    output: { // This one is controlling the output
+      file: `dist/build/styles-injected/${filename}.css`
+    },
+    plugins: [css({ output: `${filename}.css` })],
+    watch: {
+      clearScreen: true
+    }
+  };
+}
+
 export default [
-  createConfig("scripts/ytsc-content-script"),
-  createConfig("popup/popup", true)
+  createConfig("scripts/ytsc-content-script-initialize"),
+  createConfig("popup/popup", true),
+  createConfigCss("main")
 ];
