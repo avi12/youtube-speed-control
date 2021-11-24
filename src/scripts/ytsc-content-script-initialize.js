@@ -1,43 +1,22 @@
-"use strict";
-
+import { getElementByObserver } from "../shared-utils/ytsc-setup-utils";
 import {
-  getCompatibleValue,
-  getElementByObserver,
-  getStorage,
-  initial
-} from "../shared-utils/ytsc-setup-utils";
+  addKeyboardListener,
+  prepareToChangeSpeed,
+  setSpeedToCurrentVideo,
+  updatePlaybackRateText
+} from "./ytsc-content-script-functions";
 
-let gSpeedLast;
+window.ytscLastSpeedSet = null;
 
 const gObserverOptions = {
   childList: true,
   subtree: true
 };
 
-async function getSpeed() {
-  try {
-    const speed = (await getStorage("local", "speed")) ?? initial.speed;
-    gSpeedLast = getCompatibleValue(speed);
-    // eslint-disable-next-line no-empty
-  } catch {}
-  return gSpeedLast;
-}
 async function addNavigationListener() {
-  const elTitle = await getElementByObserver("title");
   const observerPageNavigation = new MutationObserver(addTemporaryBodyListener);
+  const elTitle = await getElementByObserver("title");
   observerPageNavigation.observe(elTitle, gObserverOptions);
-}
-
-async function setSpeedToCurrentVideo() {
-  const elVideo = document.querySelector("video");
-  elVideo.playbackRate = await getSpeed();
-  updatePlaybackRateText(elVideo);
-}
-
-function updatePlaybackRateText(elVideo) {
-  elVideo = elVideo?.target ?? elVideo;
-  document.getElementById("yt-speed").textContent =
-    elVideo.playbackRate.toFixed(2) + "x";
 }
 
 function addPlaybackListener(elVideo) {
@@ -63,9 +42,11 @@ function addTemporaryBodyListener() {
     if (!elVideo) {
       return;
     }
+
     observer.disconnect();
     injectPlaybackText();
-    await setSpeedToCurrentVideo();
+
+    await prepareToChangeSpeed();
     addPlaybackListener(elVideo);
   }).observe(document.documentElement, gObserverOptions);
 }
@@ -78,6 +59,8 @@ function init() {
   addTemporaryBodyListener();
   addNavigationListener();
   addStorageListener();
+  addKeyboardListener();
+  prepareToChangeSpeed();
 }
 
 init();
