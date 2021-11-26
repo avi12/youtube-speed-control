@@ -2,7 +2,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import svelte from "rollup-plugin-svelte";
 import { terser } from "rollup-plugin-terser";
-import sveltePreprocess from "svelte-preprocess";
 import css from "rollup-plugin-css-only";
 
 const isProduction = !process.env.ROLLUP_WATCH;
@@ -21,7 +20,6 @@ function createConfig(filename, useSvelte = false) {
           compilerOptions: {
             dev: !isProduction
           },
-          preprocess: sveltePreprocess()
         }),
       resolve({
         dedupe: ["svelte"]

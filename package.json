@@ -24,8 +24,8 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.0",
     "@rollup/plugin-node-resolve": "^13.0.5",
-    "@types/chrome": "^0.0.162",
     "@sveltejs/eslint-config": "github:sveltejs/eslint-config",
+    "@types/chrome": "^0.0.162",
     "adm-zip": "^0.5.9",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
@@ -43,7 +43,6 @@
     "set-json-version": "^1.0.6",
     "svelte": "^3.43.2",
     "svelte-materialify": "0.3.7",
-    "svelte-preprocess": "^4.9.8",
     "web-ext": "^6.5.0",
     "yargs": "^17.2.1"
   }
