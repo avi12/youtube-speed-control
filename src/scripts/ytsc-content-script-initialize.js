@@ -1,21 +1,21 @@
-import { getElementByObserver } from "../shared-utils/ytsc-setup-utils";
+import { getElementEventually } from "../shared-utils/ytsc-setup-utils";
 import {
-  addKeyboardListener,
+  changeSpeedManuallyIfNeeded,
   prepareToChangeSpeed,
-  setSpeedToCurrentVideo,
   updatePlaybackRateText
 } from "./ytsc-content-script-functions";
 
 window.ytscLastSpeedSet = null;
+window.ytscLastSpeedRateSet = null;
 
 const gObserverOptions = {
   childList: true,
   subtree: true
 };
 
-async function addNavigationListener() {
+function addNavigationListener() {
   const observerPageNavigation = new MutationObserver(addTemporaryBodyListener);
-  const elTitle = await getElementByObserver("title");
+  const elTitle = document.querySelector("title");
   observerPageNavigation.observe(elTitle, gObserverOptions);
 }
 
@@ -38,12 +38,15 @@ function injectPlaybackText() {
 
 function addTemporaryBodyListener() {
   new MutationObserver(async (_, observer) => {
-    const elVideo = await getElementByObserver("video");
+    const elVideo = await getElementEventually("video");
     if (!elVideo) {
       return;
     }
 
     observer.disconnect();
+
+    window.ytscLastSpeedSet = null;
+    window.ytscLastSpeedRateSet = null;
     injectPlaybackText();
 
     await prepareToChangeSpeed();
@@ -52,7 +55,26 @@ function addTemporaryBodyListener() {
 }
 
 function addStorageListener() {
-  chrome.storage.onChanged.addListener(setSpeedToCurrentVideo);
+  chrome.storage.onChanged.addListener(() => {
+    if (!window.ytscLastSpeedSet) {
+      prepareToChangeSpeed();
+    }
+  });
+}
+
+function addKeyboardListener() {
+  document.addEventListener("keydown", async e => {
+    /** @type {HTMLVideoElement} */
+    const elVideo = await getElementEventually("video");
+    const isPressedToChangeSpeed = e.key === "<" || e.key === ">";
+    const isFocusedOnInput =
+      document.activeElement.matches("input") ||
+      document.activeElement.getAttribute("contenteditable") === "true";
+
+    if (elVideo && isPressedToChangeSpeed && !isFocusedOnInput) {
+      await changeSpeedManuallyIfNeeded(elVideo, e.key);
+    }
+  });
 }
 
 function init() {
