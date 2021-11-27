@@ -7,17 +7,17 @@ speed "on the fly", i.e. changing the speed will immediately affect any videos y
 
 Available for:
 
-* [Google Chrome](https://chrome.google.com/webstore/detail/dmpbgbehgckaijcpmodinibhkdgbifif) ![users count](https://img.shields.io/chrome-web-store/users/dmpbgbehgckaijcpmodinibhkdgbifif?color=white&label=users&style=flat-square)
-* [Mozilla Firefox](https://addons.mozilla.org/addon/youtube-speed-control-1) ![users count](https://img.shields.io/amo/users/youtube-speed-control-1?color=white&label=users&style=flat-square)
-* [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ipajmlopcjnobogfakhlggainepilahm) ![users count](https://img.shields.io/badge/dynamic/json?label=users&query=activeInstallCount&style=flat-square&color=white&url=https://microsoftedge.microsoft.com/addons/getproductdetailsbycrxid/ipajmlopcjnobogfakhlggainepilahm)
-* [Opera](https://addons.opera.com/en/extensions/details/youtube-speed-control)
+- [Google Chrome](https://chrome.google.com/webstore/detail/dmpbgbehgckaijcpmodinibhkdgbifif) ![users count](https://img.shields.io/chrome-web-store/users/dmpbgbehgckaijcpmodinibhkdgbifif?color=white&label=users&style=flat-square)
+- [Mozilla Firefox](https://addons.mozilla.org/addon/youtube-speed-control-1) ![users count](https://img.shields.io/amo/users/youtube-speed-control-1?color=white&label=users&style=flat-square)
+- [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/ipajmlopcjnobogfakhlggainepilahm) ![users count](https://img.shields.io/badge/dynamic/json?label=users&query=activeInstallCount&style=flat-square&color=white&url=https://microsoftedge.microsoft.com/addons/getproductdetailsbycrxid/ipajmlopcjnobogfakhlggainepilahm)
+- [Opera](https://addons.opera.com/en/extensions/details/youtube-speed-control)
 
 Made by [avi12](https://avi12.com).
 
 ### Made with
 
-* [Svelte](https://svelte.dev)
-* [Svelte Materialify](https://svelte-materialify.vercel.app/)
+- [Svelte](https://svelte.dev)
+- [Svelte Materialify](https://svelte-materialify.vercel.app/)
 
 ## Requirements for setting up
 
@@ -33,7 +33,7 @@ pnpm i
 
 ```shell
 pnpm serve
-````
+```
 
 ## Running
 
@@ -68,8 +68,15 @@ pnpm build-pack
 ```
 
 ### Build for Firefox (you need to first run `pnpm build-pack`)
+
 ```shell
-pnpm build-for-firefox
+pnpm build-for --browser=firefox
+```
+
+### Build for Opera (you need to first run `pnpm build-pack`)
+
+```shell
+pnpm build-for --browser=opera
 ```
 
 ## Contribution
