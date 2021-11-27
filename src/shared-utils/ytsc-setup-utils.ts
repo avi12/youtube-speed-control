@@ -95,3 +95,17 @@ export function getErrorMessage(min: number, max: number): string {
 export function getInputTitle(min: number, max: number): string {
   return `Please enter a number between ${min} and ${max}`;
 }
+
+
+export function preventNegative(e: KeyboardEvent): void {
+  if (e.key === "-") {
+    e.preventDefault();
+  }
+}
+
+export function preventDecrease(e: KeyboardEvent): void {
+  const target = e.target as HTMLInputElement;
+  if (e.key === "ArrowDown" && Number(target.value) - 1 < 0) {
+    e.preventDefault();
+  }
+}
