@@ -1,15 +1,19 @@
 <script>
-  import { MaterialAppMin, Slider, TextField, Radio } from "svelte-materialify";
+  import { MaterialAppMin, Radio, Slider, TextField } from "svelte-materialify";
   import {
+    getErrorMessage,
+    getInputTitle,
     getIsValueCompatible,
     initial,
     MAX_PLAYBACK,
+    MAX_SPEED_RATE,
     MIN_PLAYBACK,
+    MIN_SPEED_RATE,
     speeds
   } from "../../shared-utils/ytsc-setup-utils";
 
   export let speedCustom = initial.speed;
-
+  export let speedRate = initial.speedRate;
   let iSpeed = (() => {
     const isSpeedInArray = speeds.indexOf(speedCustom) > -1;
     if (isSpeedInArray) {
@@ -41,10 +45,42 @@
     chrome.storage.local.set({ speed: Number(speedCustom) });
   }
 
-  const speedCustomError =
+  $: chrome.storage.local.set({
+    speedRate: {
+      decrement: isSpeedRateWithinRange(speedRate.decrement)
+        ? Number(speedRate.decrement)
+        : initial.speedRate.decrement,
+      increment: isSpeedRateWithinRange(speedRate.increment)
+        ? Number(speedRate.increment)
+        : initial.speedRate.increment
+    }
+  });
+
+  const SPACE = " ";
+  $: errorSpeedCustom =
     speedCustom !== "" && getIsValueCompatible(speedCustom)
-      ? " "
-      : `Must be between ${MIN_PLAYBACK} and ${MAX_PLAYBACK}`;
+      ? SPACE
+      : getErrorMessage(MIN_PLAYBACK, MAX_PLAYBACK);
+
+  const hintSpeedRate = {
+    decrement: `By pressing "<"`,
+    increment: `By pressing ">"`
+  };
+
+  function isSpeedRateWithinRange(speedRate) {
+    speedRate = Number(speedRate);
+    return speedRate > MIN_SPEED_RATE && speedRate <= MAX_SPEED_RATE - 1;
+  }
+
+  $: errorSpeedRateDecrement =
+    speedRate.decrement !== "" && isSpeedRateWithinRange(speedRate.decrement)
+      ? hintSpeedRate.decrement
+      : getErrorMessage(MIN_SPEED_RATE, MAX_SPEED_RATE) + " (excluding)";
+
+  $: errorSpeedRateIncrement =
+    speedRate.increment !== "" && isSpeedRateWithinRange(speedRate.increment)
+      ? hintSpeedRate.increment
+      : getErrorMessage(MIN_SPEED_RATE, MAX_SPEED_RATE) + " (excluding)";
 
   function preventNegative(e) {
     if (e.key === "-") {
@@ -91,16 +127,49 @@
     <TextField
       autofocus
       bind:value={speedCustom}
-      color="secondary"
+      color={errorSpeedCustom !== SPACE ? "error" : "secondary"}
       dense
-      messages={speedCustomError}
-      on:keypress={preventNegative}
+      outlined
+      messages={errorSpeedCustom}
       on:keydown={preventDecrease}
+      on:keypress={preventNegative}
+      title={getInputTitle(MIN_PLAYBACK, MAX_PLAYBACK)}
       type="number"
     >
       Custom
     </TextField>
   </Radio>
+
+  <div class="speed-rate">
+    <TextField
+      bind:value={speedRate.decrement}
+      class="speed-rate__input--width"
+      color={errorSpeedRateDecrement !== hintSpeedRate.decrement ? "error" : "secondary"}
+      dense
+      outlined
+      messages={errorSpeedRateDecrement}
+      on:keydown={preventDecrease}
+      on:keypress={preventNegative}
+      title={`${getInputTitle(MIN_SPEED_RATE, MAX_SPEED_RATE)} (excluding)`}
+      type="number"
+    >
+      Decrement speed
+    </TextField>
+
+    <TextField
+      bind:value={speedRate.increment}
+      class="speed-rate__input--width"
+      color={errorSpeedRateIncrement !== hintSpeedRate.increment ? "error" : "secondary"}
+      dense
+      outlined
+      messages={errorSpeedRateIncrement}
+      on:keydown={preventDecrease}
+      on:keypress={preventNegative}
+      title={`${getInputTitle(MIN_SPEED_RATE, MAX_SPEED_RATE)} (excluding)`}
+      type="number"
+      >Increment speed
+    </TextField>
+  </div>
 </MaterialAppMin>
 
 <style>
@@ -121,6 +190,27 @@
   /*noinspection CssUnusedSymbol*/
   :global(.s-text-field) {
     margin-top: -10px;
+  }
+
+  .speed-rate {
+    display: flex;
+    gap: 10px;
+    padding: 0 15px 15px;
+  }
+
+  /*noinspection CssUnusedSymbol*/
+  :global(.speed-rate__input--width.s-input) {
+    align-items: start;
+  }
+
+  /*noinspection CssUnusedSymbol*/
+  :global(.speed-rate__input--width .s-input__control) {
+    max-width: 196px;
+  }
+
+  /*noinspection CssUnusedSymbol*/
+  :global(.s-text-field__wrapper.outlined:focus-within::before) {
+    border-width: 1px !important;
   }
 
   /*noinspection CssUnusedSymbol*/
