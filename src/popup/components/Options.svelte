@@ -1,5 +1,5 @@
-<script>
-  import { MaterialAppMin, Radio, Slider, TextField } from "svelte-materialify";
+<script lang="ts">
+  import { MaterialAppMin, Radio, Slider, TextField } from "svelte-materialify/dist";
   import {
     getErrorMessage,
     getInputTitle,

@@ -4,6 +4,14 @@ import {
   prepareToChangeSpeed,
   updatePlaybackRateText
 } from "./ytsc-content-script-functions";
+import type { SpeedRate } from "../types";
+
+declare global {
+  interface Window {
+    ytscLastSpeedSet: number;
+    ytscLastSpeedRateSet: SpeedRate;
+  }
+}
 
 window.ytscLastSpeedSet = null;
 window.ytscLastSpeedRateSet = null;
@@ -13,17 +21,17 @@ const gObserverOptions = {
   subtree: true
 };
 
-function addNavigationListener() {
+function addNavigationListener(): void {
   const observerPageNavigation = new MutationObserver(addTemporaryBodyListener);
   const elTitle = document.querySelector("title");
   observerPageNavigation.observe(elTitle, gObserverOptions);
 }
 
-function addPlaybackListener(elVideo) {
+function addPlaybackRateListener(elVideo): void {
   elVideo.addEventListener("ratechange", updatePlaybackRateText);
 }
 
-function injectPlaybackText() {
+function injectPlaybackText(): void {
   const elRightControls = document.querySelector(".ytp-right-controls");
   const idSpeed = "yt-speed";
   if (document.getElementById(idSpeed)) {
@@ -36,7 +44,7 @@ function injectPlaybackText() {
   elRightControls.prepend(elSpeed);
 }
 
-function addTemporaryBodyListener() {
+function addTemporaryBodyListener(): void {
   new MutationObserver(async (_, observer) => {
     const elVideo = await getElementEventually("video");
     if (!elVideo) {
@@ -50,11 +58,11 @@ function addTemporaryBodyListener() {
     injectPlaybackText();
 
     await prepareToChangeSpeed();
-    addPlaybackListener(elVideo);
+    addPlaybackRateListener(elVideo);
   }).observe(document.documentElement, gObserverOptions);
 }
 
-function addStorageListener() {
+function addStorageListener(): void {
   chrome.storage.onChanged.addListener(() => {
     if (!window.ytscLastSpeedSet) {
       prepareToChangeSpeed();
@@ -62,10 +70,9 @@ function addStorageListener() {
   });
 }
 
-function addKeyboardListener() {
+function addKeyboardListener(): void {
   document.addEventListener("keydown", async e => {
-    /** @type {HTMLVideoElement} */
-    const elVideo = await getElementEventually("video");
+    const elVideo = await getElementEventually("video") as HTMLVideoElement;
     const isPressedToChangeSpeed = e.key === "<" || e.key === ">";
     const isFocusedOnInput =
       document.activeElement.matches("input") ||

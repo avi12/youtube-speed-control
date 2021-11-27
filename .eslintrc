@@ -1,4 +1,5 @@
 {
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module"
@@ -22,7 +23,8 @@
         "SwitchCase": 1
       }
     ],
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "overrides": [
     {
@@ -36,6 +38,9 @@
     "node": true,
     "webextensions": true
   },
-  "plugins": ["svelte3"],
-  "extends": ["eslint:recommended"]
+  "plugins": ["svelte3", "@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "settings": {
+    "svelte3/typescript": true
+  }
 }

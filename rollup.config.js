@@ -3,17 +3,20 @@ import resolve from "@rollup/plugin-node-resolve";
 import svelte from "rollup-plugin-svelte";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
+import typescript from "@rollup/plugin-typescript";
 
 const isProduction = !process.env.ROLLUP_WATCH;
 
 function createConfig(filename, useSvelte = false) {
   return {
-    input: `src/${filename}.js`,
+    input: `src/${filename}.ts`,
     output: {
       format: "cjs",
-      file: `dist/build/${filename}.js`
+      file: `dist/build/${filename}.js`,
+      sourcemap: false
     },
     plugins: [
+      typescript(),
       useSvelte && css({ output: "popup.css" }),
       useSvelte &&
         svelte({

@@ -6,6 +6,7 @@ import {
   MAX_PLAYBACK,
   MIN_PLAYBACK
 } from "../shared-utils/ytsc-setup-utils";
+import type { SpeedRate } from "../types";
 
 export async function prepareToChangeSpeed() {
   const speed = await getSpeed();
@@ -13,10 +14,7 @@ export async function prepareToChangeSpeed() {
   await updatePlaybackRateText();
 }
 
-/**
- * @returns {Promise<number>}
- */
-export async function getSpeed() {
+export async function getSpeed(): Promise<number> {
   let speed = window.ytscLastSpeedSet || initial.speed;
   try {
     speed = (await getStorage("local", "speed")) || speed;
@@ -29,10 +27,7 @@ export async function getSpeed() {
   return window.ytscLastSpeedSet;
 }
 
-/**
- * @returns {Promise<{decrement: number, increment: number}>}
- */
-async function getSpeedRate() {
+async function getSpeedRate(): Promise<SpeedRate> {
   let speedRate = window.ytscLastSpeedRateSet || initial.speedRate;
   try {
     speedRate = (await getStorage("local", "speedRate")) || speedRate;
@@ -45,31 +40,22 @@ async function getSpeedRate() {
   return window.ytscLastSpeedRateSet;
 }
 
-/**
- * @param {number} speed
- */
-async function setSpeedToCurrentVideo(speed) {
-  const elVideo = await getElementEventually("video");
+async function setSpeedToCurrentVideo(speed: number) {
+  const elVideo = (await getElementEventually("video")) as HTMLVideoElement;
   elVideo.playbackRate = speed;
   await updatePlaybackRateText(elVideo);
 }
 
-/**
- * @param {HTMLVideoElement|Event} [elVideo]
- */
-export async function updatePlaybackRateText(elVideo) {
-  elVideo = elVideo?.target ?? elVideo ?? (await getElementEventually("video"));
+export async function updatePlaybackRateText(elVideo?: HTMLVideoElement | Event) {
+  elVideo = ((<Event>elVideo)?.target ??
+    elVideo ??
+    (await getElementEventually("video"))) as HTMLVideoElement;
 
   const elSpeedIndicator = await getElementEventually("#yt-speed");
   elSpeedIndicator.textContent = elVideo.playbackRate.toFixed(2) + "x";
 }
 
-/**
- * @param {HTMLVideoElement} elVideo
- * @param {"<"|">"} newRate
- * @returns {Promise<void>}
- */
-export async function changeSpeedManuallyIfNeeded(elVideo, newRate) {
+export async function changeSpeedManuallyIfNeeded(elVideo: HTMLVideoElement, newRate: "<" | ">"): Promise<void> {
   const slower = "<";
   const faster = ">";
 
