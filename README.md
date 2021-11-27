@@ -3,7 +3,7 @@
 A browser extension that lets you control the speed of YouTube videos, even if they're embedded, including changing the
 speed "on the fly", i.e. changing the speed will immediately affect any videos you're watching.
 
-![Google Chrome screenshot](https://user-images.githubusercontent.com/6422804/139532837-0768aa04-a64c-4a1b-85c1-2f9ea42bfa5a.png)
+![Google Chrome screenshot](https://user-images.githubusercontent.com/6422804/143684962-1c7adbff-d3a5-420a-9eb7-202160592ed9.png)
 
 Available for:
 
