@@ -13,6 +13,9 @@ export const initial = {
 export const MIN_PLAYBACK = 0.0625;
 export const MAX_PLAYBACK = 16;
 
+export const MIN_SPEED_RATE = 0;
+export const MAX_SPEED_RATE = 16;
+
 /**
  * Used for asynchronous Promise-based storage retrieval.
  * @param {"local"|"sync"} storageArea
@@ -59,10 +62,11 @@ export function getIsValueCompatible(speed) {
  * @param {string} selector The query selector of the element.
  * @returns {Promise<HTMLElement>} The element, as soon as it exists in the document.
  */
-export async function getElementByObserver(selector) {
+async function getElementByObserver(selector) {
   return new Promise(resolve => {
     const observerHtml = new MutationObserver((_, observer) => {
-      const element = document.querySelector(selector);
+      const elements = document.querySelectorAll(selector);
+      const element = getVisibleElement(elements);
       if (element) {
         observer.disconnect();
         resolve(element);
@@ -73,4 +77,55 @@ export async function getElementByObserver(selector) {
       subtree: true
     });
   });
+}
+
+/**
+ * @param {HTMLElement} element
+ * @returns {boolean}
+ */
+function isElementVisible(element) {
+  return element.offsetWidth > 0 && element.offsetHeight > 0;
+}
+
+/**
+ * @param {NodeListOf} elements
+ * @returns {HTMLElement|undefined}
+ */
+function getVisibleElement(elements) {
+  for (const element of elements) {
+    if (isElementVisible(element)) {
+      return element;
+    }
+  }
+}
+
+
+/**
+ * @param {string} selector
+ * @returns {Promise<HTMLElement>}
+ */
+export async function getElementEventually(selector) {
+  const elements = document.querySelectorAll(selector);
+  return (
+    (elements.length > 0 && getVisibleElement(elements)) ||
+    (await getElementByObserver(selector))
+  );
+}
+
+/**
+ * @param {number} min
+ * @param {number} max
+ * @returns {string}
+ */
+export function getErrorMessage(min, max) {
+  return `Must be between ${min} and ${max}`;
+}
+
+/**
+ * @param {number} min
+ * @param {number} max
+ * @returns {string}
+ */
+export function getInputTitle(min, max) {
+  return `Please enter a number between ${min} and ${max}`;
 }
