@@ -10,6 +10,11 @@ if (!fs.existsSync(dirZip)) {
   process.exit();
 }
 
+if (!argv.browser) {
+  console.log("Specify either --browser=firefox or --browser=opera");
+  process.exit();
+}
+
 function getManifest(zip, entry) {
   return JSON.parse(zip.getEntry(entry).getData());
 }
@@ -26,7 +31,7 @@ function rebuildZipForFirefox(zipName, version) {
   const manifest = getModifiedManifest(getManifest(zip, "manifest.json"));
 
   zip.addFile("manifest.json", Buffer.from(JSON.stringify(manifest), "utf-8"));
-  zip.writeZip(argv.i.replace("{version}", version + "__adapted_for_firefox"));
+  zip.writeZip(argv.i.replace("{version}", `${version}__adapted_for_${argv.browser}`));
 }
 
 function rebuildZipSourceForFirefox(zipName, version) {
@@ -34,7 +39,7 @@ function rebuildZipSourceForFirefox(zipName, version) {
   const manifest = getModifiedManifest(getManifest(zip, "dist/manifest.json"));
 
   zip.addFile("manifest.json", Buffer.from(JSON.stringify(manifest, null, 2), "utf-8"));
-  zip.writeZip(argv.i.replace("{version}", version + "__adapted_for_firefox-source"));
+  zip.writeZip(argv.i.replace("{version}", `${version}__adapted_for_${argv.browser}-source`));
 }
 
 function init() {
