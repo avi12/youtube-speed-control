@@ -1,6 +1,6 @@
 import {
   getCompatibleValue,
-  getElementByObserver,
+  getElementEventually,
   getStorage,
   initial,
   MAX_PLAYBACK,
@@ -10,79 +10,86 @@ import {
 export async function prepareToChangeSpeed() {
   const speed = await getSpeed();
   await setSpeedToCurrentVideo(speed);
+  await updatePlaybackRateText();
 }
 
-async function getSpeed() {
+/**
+ * @returns {Promise<number>}
+ */
+export async function getSpeed() {
+  let speed = window.ytscLastSpeedSet || initial.speed;
   try {
-    const speed = (await getStorage("local", "speed")) ?? initial.speed;
+    speed = (await getStorage("local", "speed")) || speed;
     window.ytscLastSpeedSet = getCompatibleValue(speed);
-  } catch {
-    return window.ytscLastSpeedSet;
-  }
+    // eslint-disable-next-line no-empty
+  } catch {}
+  // Handling "Error: Extension context invalidated"
+  // It typically occurs when the extension receives an update
+  // but the user hasn't refreshed the page yet
+  return window.ytscLastSpeedSet;
 }
 
 /**
- * @param {number|StorageEvent} speed
+ * @returns {Promise<{decrement: number, increment: number}>}
  */
-export async function setSpeedToCurrentVideo(speed) {
-  speed = typeof speed === "number" ? speed : window.ytscLastSpeedSet;
+async function getSpeedRate() {
+  let speedRate = window.ytscLastSpeedRateSet || initial.speedRate;
+  try {
+    speedRate = (await getStorage("local", "speedRate")) || speedRate;
+    window.ytscLastSpeedRateSet = speedRate;
+    // eslint-disable-next-line no-empty
+  } catch {}
+  // Handling "Error: Extension context invalidated"
+  // It typically occurs when the extension receives an update
+  // but the user hasn't refreshed the page yet
+  return window.ytscLastSpeedRateSet;
+}
 
-  const elVideo = document.querySelector("video");
+/**
+ * @param {number} speed
+ */
+async function setSpeedToCurrentVideo(speed) {
+  const elVideo = await getElementEventually("video");
   elVideo.playbackRate = speed;
-  updatePlaybackRateText(elVideo);
-}
-
-export async function updatePlaybackRateText(elVideo) {
-  elVideo = elVideo?.target ?? elVideo;
-  (await getElementByObserver("#yt-speed")).textContent = elVideo.playbackRate.toFixed(2) + "x";
-}
-
-function getIsFocusedOnInput() {
-  const isCommentFocused = document.activeElement.getAttribute("contenteditable") === "true";
-  return document.activeElement.matches("input") || isCommentFocused;
+  await updatePlaybackRateText(elVideo);
 }
 
 /**
- * @param {string} key
- * @returns {boolean}
+ * @param {HTMLVideoElement|Event} [elVideo]
  */
-function getIsPressedSpeedChange(key) {
-  return key === "<" || key === ">";
+export async function updatePlaybackRateText(elVideo) {
+  elVideo = elVideo?.target ?? elVideo ?? (await getElementEventually("video"));
+
+  const elSpeedIndicator = await getElementEventually("#yt-speed");
+  elSpeedIndicator.textContent = elVideo.playbackRate.toFixed(2) + "x";
 }
 
 /**
  * @param {HTMLVideoElement} elVideo
- * @param {string} newRate
+ * @param {"<"|">"} newRate
  * @returns {Promise<void>}
  */
-async function changeSpeedIfNeeded(elVideo, newRate) {
-  const speedRate = (await getStorage("local", "speedRate")) ?? initial.speedRate;
+export async function changeSpeedManuallyIfNeeded(elVideo, newRate) {
+  const slower = "<";
+  const faster = ">";
+
+  const speedRate = await getSpeedRate();
+
   const mapKeyToAction = {
-    "<": () => setSpeedToCurrentVideo(window.ytscLastSpeedSet - speedRate.decrement),
-    ">": () => setSpeedToCurrentVideo(window.ytscLastSpeedSet + speedRate.increment)
+    [slower]: () =>
+      setSpeedToCurrentVideo(getCompatibleValue(window.ytscLastSpeedSet - speedRate.decrement)),
+    [faster]: () =>
+      setSpeedToCurrentVideo(getCompatibleValue(window.ytscLastSpeedSet + speedRate.increment))
   };
-  const isTooSlow =
-    newRate === "<" && window.ytscLastSpeedSet - speedRate.decrement < MIN_PLAYBACK;
-  const isTooFast =
-    newRate === ">" && window.ytscLastSpeedSet + speedRate.increment > MAX_PLAYBACK;
-  if (isTooSlow || isTooFast) {
+  const isTooMuch = {
+    [slower]: window.ytscLastSpeedSet - speedRate.decrement < MIN_PLAYBACK,
+    [faster]: window.ytscLastSpeedSet + speedRate.increment > MAX_PLAYBACK
+  };
+
+  if (isTooMuch[newRate]) {
     return;
   }
 
-  mapKeyToAction[newRate]();
+  await mapKeyToAction[newRate]();
   window.ytscLastSpeedSet = elVideo.playbackRate;
-}
-
-export function addKeyboardListener() {
-  addEventListener(
-    "keydown",
-    async e => {
-      const elVideo = await getElementByObserver("video");
-      if (!elVideo || !getIsPressedSpeedChange(e.key) || getIsFocusedOnInput()) {
-        return;
-      }
-
-      changeSpeedIfNeeded(elVideo, e.key);
-    }
-  );
 }
