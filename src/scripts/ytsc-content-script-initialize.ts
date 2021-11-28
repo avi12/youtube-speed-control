@@ -10,11 +10,13 @@ declare global {
   interface Window {
     ytscLastSpeedSet: number;
     ytscLastSpeedRateSet: SpeedRate;
+    ytscIsSetSpeedByStorage: boolean;
   }
 }
 
 window.ytscLastSpeedSet = null;
 window.ytscLastSpeedRateSet = null;
+window.ytscIsSetSpeedByStorage = true;
 
 const gObserverOptions = {
   childList: true,
@@ -55,6 +57,7 @@ function addTemporaryBodyListener(): void {
 
     window.ytscLastSpeedSet = null;
     window.ytscLastSpeedRateSet = null;
+    window.ytscIsSetSpeedByStorage = true;
     injectPlaybackText();
 
     await prepareToChangeSpeed();
@@ -64,7 +67,7 @@ function addTemporaryBodyListener(): void {
 
 function addStorageListener(): void {
   chrome.storage.onChanged.addListener(() => {
-    if (!window.ytscLastSpeedSet) {
+    if (window.ytscIsSetSpeedByStorage) {
       prepareToChangeSpeed();
     }
   });
@@ -79,6 +82,7 @@ function addKeyboardListener(): void {
       document.activeElement.getAttribute("contenteditable") === "true";
 
     if (elVideo && isPressedToChangeSpeed && !isFocusedOnInput) {
+      window.ytscIsSetSpeedByStorage = false;
       await changeSpeedManuallyIfNeeded(elVideo, e.key);
     }
   });
