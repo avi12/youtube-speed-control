@@ -15,12 +15,12 @@ export async function prepareToChangeSpeed() {
 }
 
 export async function getSpeed(): Promise<number> {
-  let speed = window.ytscLastSpeedSet || initial.speed;
+  let speed;
   try {
-    speed = (await getStorage("local", "speed")) || speed;
-    window.ytscLastSpeedSet = getCompatibleValue(speed);
+    speed = (await getStorage("local", "speed"));
     // eslint-disable-next-line no-empty
   } catch {}
+  window.ytscLastSpeedSet = getCompatibleValue(speed || initial.speed);
   // Handling "Error: Extension context invalidated"
   // It typically occurs when the extension receives an update
   // but the user hasn't refreshed the page yet
@@ -28,12 +28,12 @@ export async function getSpeed(): Promise<number> {
 }
 
 async function getSpeedRate(): Promise<SpeedRate> {
-  let speedRate = window.ytscLastSpeedRateSet || initial.speedRate;
+  let speedRate;
   try {
-    speedRate = (await getStorage("local", "speedRate")) || speedRate;
-    window.ytscLastSpeedRateSet = speedRate;
+    speedRate = (await getStorage("local", "speedRate"));
     // eslint-disable-next-line no-empty
   } catch {}
+  window.ytscLastSpeedRateSet = speedRate || initial.speedRate;
   // Handling "Error: Extension context invalidated"
   // It typically occurs when the extension receives an update
   // but the user hasn't refreshed the page yet

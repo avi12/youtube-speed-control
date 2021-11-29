@@ -55,8 +55,6 @@ function addTemporaryBodyListener(): void {
 
     observer.disconnect();
 
-    window.ytscLastSpeedSet = null;
-    window.ytscLastSpeedRateSet = null;
     window.ytscIsSetSpeedByStorage = true;
     injectPlaybackText();
 
