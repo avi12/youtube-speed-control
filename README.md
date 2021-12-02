@@ -70,13 +70,13 @@ pnpm build-pack
 ### Build for Firefox (you need to first run `pnpm build-pack`)
 
 ```shell
-pnpm build-for --browser=firefox
+pnpm build-for-firefox
 ```
 
 ### Build for Opera (you need to first run `pnpm build-pack`)
 
 ```shell
-pnpm build-for --browser=opera
+pnpm build-for-opera
 ```
 
 ## Contribution
