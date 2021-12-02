@@ -1,7 +1,9 @@
 {
   "name": "youtube-speed-control",
   "version": "2.1.2",
-  "license": "MIT",
+  "description": "Control the speed of YouTube videos!",
+  "repository": "https://github.com/avi12/youtube-speed-control",
+  "license": "GPL-3.0-or-later",
   "author": "avi12 <avi6106@gmail.com>",
   "homepage": "https://avi12.com",
   "bugs": {
