@@ -14,7 +14,8 @@ function createConfig(filename, useSvelte = false) {
     output: {
       format: "cjs",
       file: `dist/build/${filename}.js`,
-      sourcemap: false
+      sourcemap: false,
+      inlineDynamicImports: true
     },
     plugins: [
       typescript(),
