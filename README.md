@@ -23,16 +23,16 @@ Made by [avi12](https://avi12.com).
 
 Install [Node.js](https://nodejs.org) and [PNPM](https://pnpm.js.org/installation).
 
-## Download dependencies:
+## Install dependencies
 
-```shell
+```shell script
 pnpm i
 ```
 
-## Start for development
+## Start Rollup for development
 
-```shell
-pnpm serve
+```shell script
+pnpm dev
 ```
 
 ## Running
@@ -43,23 +43,18 @@ pnpm serve
 pnpm run-chromium
 ```
 
-### Firefox
-
-```shell script
-pnpm run-firefox
-```
-
-### Chromium Edge on Windows
+### Edge on Windows 10/11
 
 ```shell
 pnpm run-edge-windows
 ```
 
-### Other browsers
+### Browsers that don't support Manifest v3
 
-1. Open the extensions page in your browser.
-1. Enable the developer mode (top-right corner usually).
-1. Either drag-drop the `dist` folder onto the browser or click "Load unpacked extension" and choose it.
+1. Build the extension for Firefox/Opera (see below).
+2. Open the extensions page in that browser.
+3. Enable the developer mode (top-right corner usually).
+4. Either drag-drop the browser-compatible ZIP onto the browser or click "Load unpacked extension" and choose it.
 
 ## Build & pack
 
@@ -67,13 +62,13 @@ pnpm run-edge-windows
 pnpm build-pack
 ```
 
-### Build for Firefox (you need to first run `pnpm build-pack`)
+### Build for Firefox (first run `pnpm build-pack`)
 
 ```shell
 pnpm build-for-firefox
 ```
 
-### Build for Opera (you need to first run `pnpm build-pack`)
+### Build for Opera (first run `pnpm build-pack`)
 
 ```shell
 pnpm build-for-opera
@@ -81,6 +76,4 @@ pnpm build-for-opera
 
 ## Contribution
 
-Feel free to contribute!  
-If you want to fork, make sure to credit [avi12](https://avi12.com) and link
-to [this repository](https://github.com/avi12/youtube-speed-control).
+Feel free to contribute! Make sure to comply with the license, [GPL v3](https://github.com/avi12/skillshare-player-control/blob/main/LICENSE).
