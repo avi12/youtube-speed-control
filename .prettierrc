@@ -4,5 +4,5 @@
   "singleQuote": false,
   "svelteSortOrder": "scripts-markup-styles",
   "plugins": ["prettier-plugin-svelte"],
-  "printWidth": 100
+  "printWidth": 110
 }
