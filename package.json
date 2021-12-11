@@ -10,19 +10,19 @@
     "email": "avi6106@gmail.com"
   },
   "scripts": {
-    "serve": "rollup -c -w",
+    "dev": "rollup -c -w",
     "build": "rollup -c",
-    "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
     "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename=youtube-speed-control-{version}.zip",
+    "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
+    "build-pack": "pnpm run build && pnpm run pack && pnpm run webext-incompat-fix && pnpm run pack-self",
     "build-for-firefox": "build-for-browser --i dist_packed/youtube-speed-control-{version}.zip --browser=firefox",
     "build-for-opera": "build-for-browser --i dist_packed/youtube-speed-control-{version}.zip --browser=opera",
     "webext-incompat-fix": "webext-store-incompat-fixer -i dist_packed/youtube-speed-control-{version}.zip -s chrome,edge,firefox,opera",
-    "build-pack": "pnpm run build && pnpm run pack && pnpm run webext-incompat-fix && pnpm run pack-self && pnpm run build-for-firefox",
-    "deploy": "web-ext-deploy --env --verbose",
     "set-version": "set-json-version -f package.json dist/manifest.json -v",
     "run-browser": "web-ext run --no-config-discovery --start-url https://www.youtube.com/watch?v=dQw4w9WgXcQ --source-dir dist --verbose --target",
     "run-firefox": "pnpm run-browser firefox-desktop",
-    "run-chromium": "pnpm run-browser chromium"
+    "run-chromium": "pnpm run-browser chromium",
+    "run-edge-windows": "\"\"%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe\"\" https://steamcommunity.com/id/avi12 --load-extension=%cd%\\dist"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
