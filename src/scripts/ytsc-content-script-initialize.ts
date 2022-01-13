@@ -72,6 +72,11 @@ function addStorageListener(): void {
 }
 
 function addKeyboardListener(): void {
+  const keyMapper = {
+    Comma: "<",
+    Period: ">"
+  };
+
   document.addEventListener("keydown", async e => {
     const elVideo = (await getElementEventually("video")) as HTMLVideoElement;
     const isPressedToChangeSpeed =
@@ -81,10 +86,6 @@ function addKeyboardListener(): void {
       document.activeElement.getAttribute("contenteditable") === "true";
 
     if (elVideo && isPressedToChangeSpeed && !isFocusedOnInput) {
-      const keyMapper = {
-        Comma: "<",
-        Period: ">"
-      };
       const key = e.key.match(/[<>]/)?.[0] ?? keyMapper[e.code.match(/Comma|Period/)?.[0]];
       window.ytscIsSetSpeedByStorage = false;
       await changeSpeedManuallyIfNeeded(elVideo, key);
