@@ -15,7 +15,7 @@
     "pack": "web-ext build --overwrite-dest --artifacts-dir dist_packed --source-dir dist --filename=youtube-speed-control-{version}.zip",
     "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
     "build-pack": "pnpm run build && pnpm run pack && pnpm run webext-incompat-fix && pnpm run pack-self",
-    "build-for-firefox": "build-for-browser --i dist_packed/youtube-speed-control-{version}.zip --browser=firefox",
+    "build-for-firefox": "build-for-browser --i dist_packed/youtube-speed-control-{version}.zip --browser=firefo --sourcex",
     "build-for-opera": "build-for-browser --i dist_packed/youtube-speed-control-{version}.zip --browser=opera",
     "webext-incompat-fix": "webext-store-incompat-fixer -i dist_packed/youtube-speed-control-{version}.zip -s chrome,edge,firefox,opera",
     "set-version": "set-json-version -f package.json dist/manifest.json -v",
