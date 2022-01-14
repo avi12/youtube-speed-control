@@ -72,16 +72,23 @@ function addStorageListener(): void {
 }
 
 function addKeyboardListener(): void {
+  const keyMapper = {
+    Comma: "<",
+    Period: ">"
+  };
+
   document.addEventListener("keydown", async e => {
-    const elVideo = await getElementEventually("video") as HTMLVideoElement;
-    const isPressedToChangeSpeed = e.key === "<" || e.key === ">";
+    const elVideo = (await getElementEventually("video")) as HTMLVideoElement;
+    const isPressedToChangeSpeed =
+      Boolean(e.key.match(/[<>]/)) || (Boolean(e.code.match(/Comma|Period/)) && e.shiftKey);
     const isFocusedOnInput =
       document.activeElement.matches("input") ||
       document.activeElement.getAttribute("contenteditable") === "true";
 
     if (elVideo && isPressedToChangeSpeed && !isFocusedOnInput) {
+      const key = e.key.match(/[<>]/)?.[0] ?? keyMapper[e.code.match(/Comma|Period/)?.[0]];
       window.ytscIsSetSpeedByStorage = false;
-      await changeSpeedManuallyIfNeeded(elVideo, e.key);
+      await changeSpeedManuallyIfNeeded(elVideo, key);
     }
   });
 }
