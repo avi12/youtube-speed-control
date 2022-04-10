@@ -17,6 +17,7 @@ specifiers:
   eslint-plugin-promise: ^6.0.0
   eslint-plugin-svelte3: ^3.4.0
   postcss: ^8.4.5
+  prettier: ^2.6.2
   prettier-plugin-svelte: ^2.6.0
   rollup: ^2.63.0
   rollup-plugin-css-only: ^3.1.0
@@ -42,7 +43,7 @@ devDependencies:
   '@types/chrome': 0.0.176
   '@typescript-eslint/eslint-plugin': 5.9.1_b7b2e42b32ee097737cd3e626b10847b
   '@typescript-eslint/parser': 5.9.1_eslint@8.6.0+typescript@4.5.4
-  build-for-browser: github.com/avi12/build-for-browser/11f5dae63cd596e91cc94b2ec2557e52f03ed725
+  build-for-browser: github.com/avi12/build-for-browser/f7a591563ab9aeddc20052c0ddd6678d4b08e093
   eslint: 8.6.0
   eslint-config-prettier: 8.3.0_eslint@8.6.0
   eslint-plugin-import: 2.25.4_eslint@8.6.0
@@ -50,7 +51,8 @@ devDependencies:
   eslint-plugin-promise: 6.0.0_eslint@8.6.0
   eslint-plugin-svelte3: 3.4.0_eslint@8.6.0+svelte@3.46.1
   postcss: 8.4.5
-  prettier-plugin-svelte: 2.6.0_svelte@3.46.1
+  prettier: 2.6.2
+  prettier-plugin-svelte: 2.6.0_prettier@2.6.2+svelte@3.46.1
   rollup: 2.63.0
   rollup-plugin-css-only: 3.1.0_rollup@2.63.0
   rollup-plugin-svelte: 7.1.0_rollup@2.63.0+svelte@3.46.1
@@ -3177,13 +3179,20 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /prettier-plugin-svelte/2.6.0_svelte@3.46.1:
+  /prettier-plugin-svelte/2.6.0_prettier@2.6.2+svelte@3.46.1:
     resolution: {integrity: sha512-NPSRf6Y5rufRlBleok/pqg4+1FyGsL0zYhkYP6hnueeL1J/uCm3OfOZPsLX4zqD9VAdcXfyEL2PYqGv8ZoOSfA==}
     peerDependencies:
       prettier: ^1.16.4 || ^2.0.0
       svelte: ^3.2.0
     dependencies:
+      prettier: 2.6.2
       svelte: 3.46.1
+    dev: true
+
+  /prettier/2.6.2:
+    resolution: {integrity: sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /printj/1.1.2:
@@ -4400,8 +4409,8 @@ packages:
       readable-stream: 3.6.0
     dev: true
 
-  github.com/avi12/build-for-browser/11f5dae63cd596e91cc94b2ec2557e52f03ed725:
-    resolution: {tarball: https://codeload.github.com/avi12/build-for-browser/tar.gz/11f5dae63cd596e91cc94b2ec2557e52f03ed725}
+  github.com/avi12/build-for-browser/f7a591563ab9aeddc20052c0ddd6678d4b08e093:
+    resolution: {tarball: https://codeload.github.com/avi12/build-for-browser/tar.gz/f7a591563ab9aeddc20052c0ddd6678d4b08e093}
     name: build-for-browser
     version: 0.0.1
     hasBin: true
