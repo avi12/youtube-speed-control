@@ -16,6 +16,7 @@
     "pack-self": "zip-self -o dist_packed/youtube-speed-control-{version}-source.zip",
     "build-pack": "pnpm run build && pnpm run pack && pnpm run webext-incompat-fix && pnpm run pack-self",
     "build-for-firefox": "build-for-browser --i dist_packed/youtube-speed-control-{version}.zip --browser=firefox --source",
+    "build-for-opera": "build-for-browser --i dist_packed/youtube-speed-control-{version}.zip --browser=opera",
     "webext-incompat-fix": "webext-store-incompat-fixer -i dist_packed/youtube-speed-control-{version}.zip -s chrome,edge,firefox,opera",
     "set-version": "set-json-version -f package.json dist/manifest.json -v",
     "run-browser": "web-ext run --no-config-discovery --start-url https://www.youtube.com/watch?v=dQw4w9WgXcQ --source-dir dist --verbose --target",
@@ -54,7 +55,7 @@
     "tslib": "^2.3.1",
     "typescript": "^4.5.4",
     "web-ext": "^6.6.0",
-    "webext-store-incompat-fixer": "^0.1.40",
+    "webext-store-incompat-fixer": "^0.3.1",
     "zip-self": "^0.4.5"
   }
 }
