@@ -68,12 +68,6 @@ pnpm build-pack
 pnpm build-for-firefox
 ```
 
-### Build for Opera (first run `pnpm build-pack`)
-
-```shell
-pnpm build-for-opera
-```
-
 ## Contribution
 
 Feel free to contribute! Make sure to comply with the license, [GPL v3](https://github.com/avi12/skillshare-player-control/blob/main/LICENSE).
